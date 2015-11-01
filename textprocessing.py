@@ -1,8 +1,13 @@
 import simplejson
 import re
 from collections import Counter
+from nltk.corpus import stopwords
+import string
 
-fname='twitter_stream.2.txt'
+punctuation = list(string.punctuation)
+stop = stopwords.words('english') + punctuation + stopwords.words('german') + ['rt','via',':','RT']
+
+fname='twitter_stream.3.json'
  
 emoticons_str = r"""
     (?:
@@ -35,10 +40,6 @@ def preprocess(s, lowercase=False):
     if lowercase:
         tokens = [token if emoticon_re.search(token) else token.lower() for token in tokens]
     return tokens
-""" 
-tweet = "RT @marcobonzanini: just an example! :D http://example.com #NLP"
-print(preprocess(tweet))
-"""
 
 with open(fname,'r') as f:
     count_all = Counter()
@@ -48,13 +49,13 @@ with open(fname,'r') as f:
         #line = f.readline()
         #converts json string to a dict:
         tweet = simplejson.loads(line)
-        terms_all = [term for term in preprocess(tweet['text'])]
-        count_all.update(terms_all)
-    print(count_all.most_common(5))
-        #tweettext = preprocess(tweet['text'])
+#        terms_all = [term for term in preprocess(tweet['text']) if term not in stop]
+#        count_all.update(terms_all)
+#    print(count_all.most_common(5))
+        tweettext = preprocess(tweet['text'].encode('utf-8'))
         #tweettext is a list of unicode char
-        #tweettext=[x.encode('UTF8') for x in tweettext]
-        #print tweettext
+        #tweettext=[x for x in tweettext]
+        print tweettext
 #    tweet = "You may be told that children petting and playing with the cubs, helps them to appreciate conservation. #FALSE https:\/\/t.co\/paLTnMmXNj"
 #    print(preprocess(tweettext))
 #    print tweet['text']
