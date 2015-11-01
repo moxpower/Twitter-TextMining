@@ -1,5 +1,8 @@
-import json
+import simplejson
 import re
+from collections import Counter
+
+fname='twitter_stream.2.txt'
  
 emoticons_str = r"""
     (?:
@@ -37,14 +40,21 @@ tweet = "RT @marcobonzanini: just an example! :D http://example.com #NLP"
 print(preprocess(tweet))
 """
 
-with open('twitter_stream.1.json','r') as f:
-    line = f.readline()
-    #converts json string to a dict:
-    tweet = json.loads(line)
-    tweettext = preprocess(tweet['text'])
-    #tweettext is a list of unicode char
-    tweettext=[x.encode('UTF8') for x in tweettext]
-    print tweettext
+with open(fname,'r') as f:
+    count_all = Counter()
+    lines = (line.rstrip() for line in f) # All lines including the blank ones
+    lines = (line for line in lines if line) # Non-blank lines
+    for line in lines:
+        #line = f.readline()
+        #converts json string to a dict:
+        tweet = simplejson.loads(line)
+        terms_all = [term for term in preprocess(tweet['text'])]
+        count_all.update(terms_all)
+    print(count_all.most_common(5))
+        #tweettext = preprocess(tweet['text'])
+        #tweettext is a list of unicode char
+        #tweettext=[x.encode('UTF8') for x in tweettext]
+        #print tweettext
 #    tweet = "You may be told that children petting and playing with the cubs, helps them to appreciate conservation. #FALSE https:\/\/t.co\/paLTnMmXNj"
 #    print(preprocess(tweettext))
 #    print tweet['text']
