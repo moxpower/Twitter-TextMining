@@ -3,11 +3,13 @@ import re
 from collections import Counter
 from nltk.corpus import stopwords
 import string
+import pandas as pd
 
 punctuation = list(string.punctuation)
-stop = stopwords.words('english') + punctuation + stopwords.words('german') + ['rt','via',':','RT']
+stop = stopwords.words('english') + punctuation + stopwords.words('german') + ['rt','via',':','RT',u'\u2026', u'\ud83d', u'\xfcck']
 
 fname='twitter_stream.4.json'
+oname='data.tsv'
  
 emoticons_str = r"""
     (?:
@@ -51,6 +53,12 @@ with open(fname,'r') as f:
         tweet = simplejson.loads(line)
         terms_all = [term.encode('utf-8') for term in preprocess(tweet['text']) if term not in stop]
         count_all.update(terms_all)
+        countres = count_all.most_common(30)
+        df=pd.DataFrame(countres)
+        df.columns=['token','quantity']
+        df=df.set_index(['token'])
+        df.to_csv(oname,sep = ',')
+            
     print(count_all.most_common(30))
 #        tweettext = preprocess(tweet['text'].encode('utf-8'))
         #tweettext is a list of unicode char
