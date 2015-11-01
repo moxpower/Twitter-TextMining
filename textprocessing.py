@@ -7,7 +7,7 @@ import string
 punctuation = list(string.punctuation)
 stop = stopwords.words('english') + punctuation + stopwords.words('german') + ['rt','via',':','RT']
 
-fname='twitter_stream.3.json'
+fname='twitter_stream.4.json'
  
 emoticons_str = r"""
     (?:
