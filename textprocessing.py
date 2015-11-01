@@ -46,17 +46,17 @@ with open(fname,'r') as f:
     lines = (line.rstrip() for line in f) # All lines including the blank ones
     lines = (line for line in lines if line) # Non-blank lines
     for line in lines:
-        #line = f.readline()
-        #converts json string to a dict:
+        """        #line = f.readline()
+        #converts json string to a dict:"""
         tweet = simplejson.loads(line)
-#        terms_all = [term for term in preprocess(tweet['text']) if term not in stop]
-#        count_all.update(terms_all)
-#    print(count_all.most_common(5))
-        tweettext = preprocess(tweet['text'].encode('utf-8'))
+        terms_all = [term.encode('utf-8') for term in preprocess(tweet['text']) if term not in stop]
+        count_all.update(terms_all)
+    print(count_all.most_common(30))
+#        tweettext = preprocess(tweet['text'].encode('utf-8'))
         #tweettext is a list of unicode char
         #tweettext=[x for x in tweettext]
-        print tweettext
-        type(tweet)
+#        print tweettext
+
 #    tweet = "You may be told that children petting and playing with the cubs, helps them to appreciate conservation. #FALSE https:\/\/t.co\/paLTnMmXNj"
 #    print(preprocess(tweettext))
 #    print tweet['text']
