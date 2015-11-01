@@ -29,7 +29,7 @@ regex_str = [
     r'(?:\S)' # anything else
 ]
     
-tokens_re = re.compile(r'('+'|'.join(regex_str)+')', re.VERBOSE | re.IGNORECASE)
+tokens_re = re.compile(r'('+'|'.join(regex_str)+')', re.UNICODE | re.VERBOSE | re.IGNORECASE)
 emoticon_re = re.compile(r'^'+emoticons_str+'$', re.VERBOSE | re.IGNORECASE)
 
 def tokenize(s):
@@ -56,6 +56,7 @@ with open(fname,'r') as f:
         #tweettext is a list of unicode char
         #tweettext=[x for x in tweettext]
         print tweettext
+        type(tweet)
 #    tweet = "You may be told that children petting and playing with the cubs, helps them to appreciate conservation. #FALSE https:\/\/t.co\/paLTnMmXNj"
 #    print(preprocess(tweettext))
 #    print tweet['text']
