@@ -1,0 +1,270 @@
+{
+  "axes": [
+    {
+      "scale": "x",
+      "type": "x"
+    },
+    {
+      "scale": "y",
+      "type": "y"
+    }
+  ],
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {
+          "col": "data",
+          "idx": "#Merkelmussweg",
+          "val": 26
+        },
+        {
+          "col": "data",
+          "idx": "#Merkel",
+          "val": 11
+        },
+        {
+          "col": "data",
+          "idx": "#merkelmussweg",
+          "val": 7
+        },
+        {
+          "col": "data",
+          "idx": "schon",
+          "val": 6
+        },
+        {
+          "col": "data",
+          "idx": "ja",
+          "val": 5
+        },
+        {
+          "col": "data",
+          "idx": "Frau",
+          "val": 5
+        },
+        {
+          "col": "data",
+          "idx": "B\u00fcrger",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "Fast",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "Viertel",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "@gagaberlin",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "https://t.co/rjeNddwPbz",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "unterschrieben",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "treten",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "Mio",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "Sie",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "https",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "\ude06",
+          "val": 4
+        },
+        {
+          "col": "data",
+          "idx": "UND",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "\u00c4TTER",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "SPIEGEL",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "Die",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "#DeutschlanddenDeutschen",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "Keine",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "Merkel",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "@DerSPIEGEL",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "Es",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "L\u00dcGENPRESSE",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "#csu",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "BILD",
+          "val": 3
+        },
+        {
+          "col": "data",
+          "idx": "mehr",
+          "val": 3
+        }
+      ]
+    },
+    {
+      "name": "stats",
+      "source": "table",
+      "transform": [
+        {
+          "keys": [
+            "data.idx"
+          ],
+          "type": "facet"
+        },
+        {
+          "type": "stats",
+          "value": "data.val"
+        }
+      ]
+    }
+  ],
+  "height": 500,
+  "legends": [],
+  "marks": [
+    {
+      "from": {
+        "data": "table",
+        "transform": [
+          {
+            "keys": [
+              "data.col"
+            ],
+            "type": "facet"
+          },
+          {
+            "height": "data.val",
+            "point": "data.idx",
+            "type": "stack"
+          }
+        ]
+      },
+      "marks": [
+        {
+          "properties": {
+            "enter": {
+              "fill": {
+                "field": "data.col",
+                "scale": "color"
+              },
+              "width": {
+                "band": true,
+                "offset": -1,
+                "scale": "x"
+              },
+              "x": {
+                "field": "data.idx",
+                "scale": "x"
+              },
+              "y": {
+                "field": "y",
+                "scale": "y"
+              },
+              "y2": {
+                "field": "y2",
+                "scale": "y"
+              }
+            }
+          },
+          "type": "rect"
+        }
+      ],
+      "type": "group"
+    }
+  ],
+  "padding": "auto",
+  "scales": [
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.idx"
+      },
+      "name": "x",
+      "range": "width",
+      "type": "ordinal",
+      "zero": false
+    },
+    {
+      "domain": {
+        "data": "stats",
+        "field": "sum"
+      },
+      "name": "y",
+      "nice": true,
+      "range": "height"
+    },
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.col"
+      },
+      "name": "color",
+      "range": "category20",
+      "type": "ordinal"
+    }
+  ],
+  "width": 960
+}

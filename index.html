@@ -58,8 +58,8 @@ var svg = d3.select("body").append("svg")
 d3.tsv("data.tsv", type, function(error, data) {
   if (error) throw error;
 
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  x.domain(data.map(function(d) { return d.token; }));
+  y.domain([0, d3.max(data, function(d) { return d.quantity; })]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -74,20 +74,20 @@ d3.tsv("data.tsv", type, function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Frequency");
+      .text("Quantity");
 
   svg.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) { return x(d.token); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
+      .attr("y", function(d) { return y(d.quantity); })
+      .attr("height", function(d) { return height - y(d.quantity); });
 });
 
 function type(d) {
-  d.frequency = +d.frequency;
+  d.quantity = +d.quantity;
   return d;
 }
 
